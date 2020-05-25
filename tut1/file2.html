@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="file2.css">
+    </head>
+    <body>
+        <div class="head-section">
+    		<h2>Javascript rocks!</h2>
+    		<p>Some function events</p>
+    	</div><hr>
+
+        <div class="container" id="mainContainer">
+            <p id="render"></p>
+            <button type="button" onClick="rand()">click</button>
+
+            <button type="button" onClick="addTag('h3')">click</button>
+
+            <br><br>
+
+            <button onclick="snackbar()">Show Snackbar</button>
+            <div id="snackbar">Some text some message..</div>
+
+            <br><br>
+            <div class="">
+                <img src="img/pets.jpg" alt="pet image" id="image">
+            </div>
+        </div>
+
+    <!-- Javescript section below  -->
+    <script  lang="javascript" type="text/javascript">
+        function rand() {
+            var value = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('render').innerHTML= value;
+        }
+
+
+
+        function addTag(tag) {
+            // create a new tag
+            var createTag = document.createElement(tag);
+            createTag.innerHTML= "I have just created a new " + tag +" tag with javascript";
+            // append the tag
+            document.getElementById('mainContainer').appendChild(createTag);
+        }
+
+
+        function snackbar() {
+              var x = document.getElementById("snackbar"), y;
+              x.className = "show";
+              y = function(){
+                	x.className = x.className.replace("show", "");
+                }
+              setTimeout(y, 3000);
+        }
+
+
+        // code to toggle images
+        var myImage = document.getElementById('image');
+        var imgArr = ['img/pets.jpg', 'img/cat.jpg', 'img/dog.jpg'];
+        var imgIndex = 0;
+        function changeImg() {
+            myImage.setAttribute('src', imgArr[imgIndex]);
+            imgIndex++;
+
+            if(imgIndex >= imgArr.length) {
+                imgIndex = 0;
+            }
+        }
+        setInterval(changeImg, 3000)
+    </script>
+    <script type="text/javascript" src="jquery3.5-mini.js"></script>
+    </body>
+</html>

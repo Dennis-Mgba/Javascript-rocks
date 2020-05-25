@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../tut1/file2.css">
+    <style media="screen">
+    .panels {
+        display: flex;
+    }
+
+    .panel {
+        border: 1px solid #99ccff;
+        width: 100px;
+        text-align: center;
+        margin-left: 50px;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .panel-heading h5 {
+        margin: 0;
+    }
+
+    .panel-heading {
+        color: #FFF;
+        background-color: blue;
+        height: 25px;
+        padding-top: 5px;
+    }
+
+    .panel-body {
+        padding: 12px 0;
+    }
+
+    .buttons button {
+        border: none;
+        margin: 0 22px 40px 65px;
+        border: 1px solid #999999;
+        background-color: #eee;
+    }
+
+    #btnImg {
+        display: flex;
+         flex-direction: column;
+         width: 200px;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="head-section">
+            <h2>Learning Jquery</h2>
+            <p>jQuery is a JavaScript Library.</p>
+        </div><hr>
+
+        <p>jQuery simplifys javascript programming. <br>
+           jQuery simplifies a lot of the complicated things
+           from JavaScript, like wrapping codes into methods
+           that you can call with a single line of code, AJAX calls and DOM manipulation.
+        </p><br>
+
+        <div class="buttons">
+            <!-- <button id="btn1">BTN 1</button>
+            <button id="btn2">BTN 2</button>
+            <button id="btn3">BTN 3</button> -->
+            <button class="panel-btn" data-panelid="panel1">BTN 1</button>
+            <button class="panel-btn" data-panelid="panel2">BTN 2</button>
+            <button class="panel-btn" data-panelid="panel3">BTN 3</button>
+        </div>
+        <div class="panels">
+            <div id="panel1" class="panel">
+                <div class="panel-heading">
+                    <h5>Panel 1</h5>
+                </div>
+                <div class="panel-body">
+                    <p>Content</p>
+                </div>
+            </div>
+
+            <div id="panel2" class="panel">
+                <div class="panel-heading">
+                    <h5>Panel 2</h5>
+                </div>
+                <div class="panel-body">
+                    <p>Content</p>
+                </div>
+            </div>
+
+            <div id="panel3" class="panel">
+                <div class="panel-heading">
+                    <h5>Panel 3</h5>
+                </div>
+                <div class="panel-body">
+                    <p>Content</p>
+                </div>
+            </div>
+        </div><br><br>
+
+        <div class="container" id="btnImg">
+            <button>Click to toggle image</button>
+            <img class="hide" id="pets-pic" src="../tut1/img/pets.jpg">
+        </div>
+
+    <script type="text/javascript" src="library/jquery3.5-mini.js"></script>
+    <script type="text/javascript">
+    /*
+    Basic syntax is: $(selector).action/method()
+    - A $ sign to define/access jQuery
+    - A (selector) to "query (or find)" HTML elements - the seletor is just exactly as we query css selectors
+    - A jQuery action() to be performed on the element(s)
+    Note: all selector in jQuery starts with a dollar sign. $("selector")
+    */
+
+    // All jQuery codes must go into a Document Ready Event - This is to prevent any jQuery code from running before the document is finished loading (is ready).
+    // $(document).ready(function(){
+    //   // jQuery methods go here...
+    // });
+
+    $(document).ready(function(){
+        // 1.
+        // $("#panel2").hide();
+
+        // 3. we can also chain commands - this will happen as soon as the document loads
+        // $("#panel2").hide(3000).show(3000);
+        // $("#panel2").hide(2000).show(2000).hide(2000).show(2000);
+        // $("#panel1").slideUp(2000).slideDown(2000);
+        // $("#panel1").slideUp(2000).delay(1000).slideDown(2000);
+
+        // 4.
+        // $("#panel3").css({
+        //     color: 'red',
+        //     fontWeight: 'bold',    // use camenlCase to define css style method not -
+        //     'font-size': '20px'    // To use - you have to put it in a quote
+        // });
+
+        $("#panel2").css({
+            opacity: 0.5
+        });
+
+        $("#btn1").html('my button');    // grab btn1 by id and rewrite the inner html
+
+
+        // 2. Event binding - Grab an element, listen for an event on it and write a fuction to be performed
+        // a.
+        // $("button").click(function(){
+        //     $("img").toggle();
+        // });
+
+
+        // b.
+        // $("#btn3").on('click', function() {
+        //     $("#panel3").slideToggle(300);
+        // });
+
+
+        // c.
+        // $("#btn1").on('click', function() {
+        //     $("#panel1").fadeToggle(300);
+        // });
+
+        // $("#btn2").on('click', function() {
+        //     $("#panel2").fadeToggle(300);
+        // });
+
+        // $("#btn3").on('mouseover', function() {
+        //     $("#panel3").fadeToggle(300);
+        // });
+        //
+        // $('#panel1').on('click', function() {
+        //     $('#panel1').slideUp(2000).delay(1000).slideDown(2000);
+        // });
+
+
+        // d.
+        // $("#btn2").on('mouseover', function() {
+        //     $("#panel2").fadeOut(300);
+        // });
+        //
+        // $("#btn2").on('click', function() {
+        //     $("#panel2").fadeIn(300);
+        // });
+
+
+        //. e
+        // $('#btn1').on('click', function(){
+        //     $('#panel1 .panel-body').html('This is a new panel conetnt');
+        // });
+
+
+        // f, - hide all pahel by default using css then use jQuery to make the buttons toggle them
+        // $('#btn1').on('click', function() {
+        //     $('#panel1').toggle();
+        // });
+        //
+        // $('#btn2').on('click', function() {
+        //     $('#panel2').toggle();
+        // });
+        //
+        // $('#btn3').on('click', function() {
+        //     $('#panel3').toggle();
+        // });
+
+
+
+        // g. - Writing smarter and shorter reuseable jQuery code
+        // $('.panel-btn').on('click', function() {
+        //     var panelId = $(this).attr('data-panelid');
+        //     $('#'+panelId).toggle();
+        // });
+
+        var content = "My awesome new content";
+        $('.panel-btn').on('click', function() {
+            var panelId = $(this).attr('data-panelid');
+            $('#'+panelId).toggle();
+            $('#' + panelId + ' .panel-body').html(content);
+        });
+
+
+        // h. DOM traversal
+
+
+        // i.
+        function handClick() {
+            // some code
+        }
+
+        $('#button').on('click', handClick);
+
+        
+
+    }); // end of jQuery document function
+    </script>
+    </body>
+</html>

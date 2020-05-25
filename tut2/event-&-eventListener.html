@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../tut1/file2.css">
+    <style media="screen">
+    .pic-section img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hide {
+        display: none;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="head-section">
+            <h2>Javascript rocks!</h2>
+            <p>Events, Event handlers and Functions</p>
+        </div><hr>
+        <div class="container">
+            <!-- 9. -->
+            <div class="pic-section">
+                <h4>Pictures</h4>
+                <ul>
+                    <li><a data-img="pets-pic" id="pets" href="#">Pets</a></li>
+                    <li><a data-img="cat-pic" id="cat" href="#">Cat</a></li>
+                    <li><a data-img="dog-pic" id="dog" href="#">Dog</a></li>
+                </ul>
+                <img class="hide" id="pets-pic" src="../tut1/img/pets.jpg">
+                <img class="hide" id="cat-pic" src="../tut1/img/cat.jpg">
+                <img class="hide" id="dog-pic" src="../tut1/img/dog.jpg">
+            </div><br><br>
+
+            <!-- 1. -->
+            <button onclick="document.getElementById('demo').innerHTML=Date()">The time is?</button>
+            <p id="demo"></p>
+
+            <!-- 2. -->
+            <input type="button" onclick="countRabbits()" value="Count rabbits!">
+            <p id="para"> </P>
+
+            <!-- 3. -->
+            <button id="elem" type="button"> click me </button> <br><br>
+            <button id="btn">Click here</button>
+            <p id="parag">content here will change</p>
+
+            <!-- 4. -->
+            <button id="btn2" type="button"> Alien greet </button> <br><br>
+
+            <!-- 5. -->
+            <div id="largeBox" style= "width: 200px; height: 100px;">
+                <button id="button">Change color</button>
+            </div>
+
+            <!-- 7. -->
+            <form>
+              <div>
+                <label for="fname">First name: </label>
+                <input id="fname" type="text">
+              </div>
+              <div>
+                <label for="lname">Last name: </label>
+                <input id="lname" type="text">
+              </div>
+              <div>
+                 <input id="submit" type="submit">
+              </div>
+              <p id="formpara"></p>
+            </form>
+
+        </div>
+
+    <script type="text/javascript">
+    /*
+    Event is a signal that something happened to the html element. Javascript is used to assign events to the HTML DOM elements.
+    And these events are made to respond to a function. So we use the events and tell the browser API what function to execute when an event happen.
+
+    Each available event has an event handler, which is a block of code (usually a defined JavaScript function) that will be run in response
+    to the event fired.  Note that event handlers are sometimes called event listeners.  The listener listens out for the event happening,
+    and the handler is the code that is run in response to it happening.
+
+    Note: It is useful to note that web events are not part of the core JavaScript language — they are defined as part of the APIs built into the browser.
+    */
+
+    // ways which events can be set on the DOM element
+    // 1. As an attribute in an html element - look in the html section above
+
+    // 2. An HTML-attribute is not a convenient place to write a lot of code, so
+    // You can write a function separetly and call the function on a DOM element, attaching it to an event handler
+    // we have being seeing this type of event handling in the other files
+    function countRabbits() {
+        for(let i = 1; i<= 3; i++) {
+        var paraContent = document.getElementById("para");
+          paraContent.innerHTML += "Rabbit number: " + i + "<br>";
+        }
+      }
+
+
+      // 2. We can assign a handler using a DOM property. Thus we can grab an element's id and assign the function as handler to it.
+      let btn = document.getElementById("elem");        // grab the button element using it's id and assign it to a variable btn
+      btn.onclick = function() {
+        alert('Thank you');                           // assign the function handler response to the btn variable
+      };
+
+
+      // 3.
+      let button = document.getElementById("btn");
+      button.addEventListener("click", () => {
+        let para = document.getElementById("parag");
+            para.innerHTML = "Button was clicked.";
+            para.style.color = "blue";
+      });
+
+
+      // 4. We can also assign an existing function as a handler directly.
+      var elemBtn = document.getElementById("btn2");
+      function greet() {
+          alert('Good day human');
+      }
+
+      elemBtn.onclick = greet;
+    // Note: In this case the function should be assigned as sayThanks, not sayThanks().
+
+
+    // 5.
+    var bttn = document.querySelector('#button');
+
+    function random(number) {
+      return Math.floor(Math.random()*(number+1));
+    }
+
+    function bgChange() {
+      var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+      var divBox = document.getElementById("largeBox");
+      divBox.style.backgroundColor = rndCol;
+      divBox.style. padding = "70px 0 0 100px";
+    }
+
+     bttn.onclick = bgChange;
+
+
+
+     // 6. It can also be done like this - With this way, we can add multiple functions to a single element if we please
+    // function myFunction1() {
+    //     alert ("Hello Human!");
+    // }
+
+    // function myFunction2() {
+    //     alert ("Can we be friends?");
+    // }
+    //
+    // element.addEventListener("click", myFunction1);
+    // element.addEventListener("click", myFunction2);
+
+
+    // 7.
+    var form = document.querySelector('form');
+    var fname = document.getElementById('fname');
+    var lname = document.getElementById('lname');
+    var submit = document.getElementById('submit');
+    var para = document.querySelector('#formpara');
+
+    form.onsubmit = function(e) {
+        let fN = fname.value;
+        let lN = lname.value;
+      if (fN === '' || lN === '') {
+        e.preventDefault();
+        para.textContent = 'You need to fill in both names!';
+        para.style.color = "red";
+    } else {
+        para.innerHTML = fN +" "+ lN;
+        para.style.color = "green";
+    }
+  }
+
+  /* if the form input fields are empty,the preventDefault() function is call on the event object —
+  which stops the form submission — and then display an error message in the paragraph.
+  */
+
+
+      // Key events
+      window.addEventListener("keydown", event => {
+      if (event.key == "v") {
+        document.body.style.background = "violet";
+      }
+    });
+    window.addEventListener("keyup", event => {
+      if (event.key == "v") {
+        document.body.style.background = "";
+      }
+    });
+
+
+
+    // 9.
+    let pets = document.getElementById("pets");
+    let cat = document.getElementById("cat");
+    let dog = document.getElementById("dog");
+
+    pets.addEventListener("click", piclink);
+    cat.addEventListener("click", piclink);
+    dog.addEventListener("click", piclink);
+
+    function piclink() {
+        let allImages = document.querySelectorAll("img");
+        for (let i = 0; i < allImages.length; i++) {
+            allImages[i].className = "hide";
+        }
+        let picId = this.attributes["data-img"].value;
+        let pic = document.getElementById(picId);
+        if (pic.className == "hide") {
+            pic.className = "";
+        } else {
+            pic.className = "hide";
+        }
+    }
+    </script>
+    </body>
+</html>

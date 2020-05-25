@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="file2.css">
+    </head>
+    <body>
+        <div class="head-section">
+            <h2>Javascript rocks!</h2>
+        </div><hr>
+        
+        <div class="container">
+            <h4>My Wishes</h4>
+        	<p id="myWishes"></p>
+
+        	<h4>Colours I love</h4>
+        	<p id="myColours"></p>
+        </div>
+
+    <script lang="javascript" type="text/javascript">
+        // 1.
+        document.write("Hello world ");
+
+
+        // 2. Array
+        var myArray = new Array();
+        	myArray[0] = "pizza";
+        	myArray[1] = "chocolate";
+        // console.log(myArray);
+
+
+        // 3.
+        var tweets = ["Morning everybdy", "I love coffee!!", "Janus please be nice"];
+        //alert(tweets[1]);
+
+        //we can add an item into the array with the push method function
+        tweets.push("I love to read and write codes");
+        // console.log(tweets);
+
+        //to remove an item from an array, the functions accepts two parameter. 1) the index number of the item 2) the number of item you want to remove
+        tweets.splice(1,1);
+        // console.log(tweets);
+
+
+        // 4. For Loop
+        // var tweets = ["Hi everyone! ", "I love spagetti ", "I'm going to be a good dev ", ":) "];
+        // tweets.push("I love programming");
+        //
+        // for (var i = 0; i < tweets.length; i++) {
+        // 	document.write(tweets[i]);
+        // }
+
+
+        var myWishes = " " ;   // initilise and put an empty string
+        var wishes = ["To be a very good software dev", "To be sucessful", "To get married to te'amo", "To have a great and peaceful family", "To help and be a blessing to people"];
+        for (var i = 0; i < wishes.length; i++){
+        	myWishes = myWishes + "<p>" + wishes[i] + "</p>";		// define the variable
+        }
+        document.getElementById("myWishes").innerHTML = myWishes;
+
+
+        // 5. While Loop
+        // let's look at how while loop will do the same thing as the for loop
+        var bestColours = " " ;   // initilise and put an empty string
+        var colours = ["White", "red", "grey", "black"];
+        var i = 0;
+        while (i < colours.length){
+        	bestColours = bestColours + "<p>" + colours[i] + "</p>";
+        	i++;
+        }
+        document.getElementById("myColours").innerHTML = bestColours;
+    </script>
+    </body>
+</html>

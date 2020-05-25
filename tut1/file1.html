@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="file2.css">
+</head>
+<body>
+	<div class="head-section">
+		<h2>Javascript rocks!</h2>
+		<p>Grabbing form input value</p>
+	</div><hr>
+
+	<div class="container">
+		Enter Your name: <input type="" name="" id="textInput">
+		<button onclick="outputText()">submit</button> <!-- assign function outputText to the button-->
+		<p id="text"></p>
+		<br/>
+
+		<p>Guess the magic word?</p>
+		<input type="" name="" id="magicWord">
+		<button onclick="checkMagicWord()">Enter</button>
+		<p id="text1"></p>
+
+		<br><br>
+
+		<form>
+			<label>Width</label>
+			<input type="number" id="width"><br>
+			<label>Height</label>
+			<input type="number" id="height"><br><br>
+			<input type="button" onclick="calc()" value="Get area">
+			<input type="text" id="answer">
+		</form>
+	</div>
+
+<script type="text/javascript">
+	function outputText(){
+		//get at the input element and access the value entered
+		var textEntered = "";
+		textEntered = document.getElementById("textInput").value;
+		//console.log(textEntered);
+		// 1. get at the paragraph element
+		// 2. assign the value entered into the input to it. this is to display whatever is inputed into the input field
+		document.getElementById("text").innerHTML= "Hey! " + textEntered + ", you are a genius.";
+	}
+
+
+	// exercising an if else statement
+	function checkMagicWord(){
+		var magicWordEntered = document.getElementById("magicWord").value;   	//grabbing value entered into the input
+		var magicWord = "abracadabra";
+
+		if (magicWordEntered == magicWord) {
+			return document.getElementById("text1").innerHTML= "Hurray!!! you got it";
+		} else {
+			return document.getElementById("text1").innerHTML= "Sorry, you're wrong";
+		}
+	}
+
+
+	// function calculate area
+	function calc() {
+		var width = document.getElementById('width').value;
+		var height = document.getElementById('height').value;
+		var answer = document.getElementById('answer');
+		var area = width * height;
+		answer.value = area;
+	}
+</script>
+</body>
+</html>

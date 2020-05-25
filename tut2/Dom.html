@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../tut1/file2.css">
+    </head>
+    <body>
+        <div class="head-section">
+            <h2>Javascript rocks!</h2>
+            <p>Javascript DOM selectors and events</p>
+        </div><hr>
+
+        <div class="container" id="section">
+            <div class="">
+                <h1 id="heading"></h1>
+                <br>
+                <a id="link" href="" >Link to the index file </a>
+            </div>
+
+            <div class="demo">Access me by class (1)</div>
+            <div class="demo">Access me by class (2)</div>
+
+            <br>
+            <button id="changeBackground">Change Background Color</button>
+            <br><br>
+
+            <div class="">
+                <h4>Add Numbers</h4>
+                <p><input id="num-one"> + <input id="num-two"></p>
+                <p id="result"></p>
+            </div>
+        </div>
+    <script type="text/javascript">
+/*   With the document object model, javascript can
+    1. change all the HTML elements in the page
+    2. change all the HTML attributes in the page
+    3. change all the CSS styles in the page
+    4. remove existing HTML elements and attributes
+    5. react to all existing HTML events in the page
+    6. cause the elements of the html mock up to interact certain ways
+    7. add new HTML elements and attributes - using document.[selctor].appendChild, document.[selector].setAttribute()
+    8. create new HTML events in the page - using documment.createElement
+
+    Javascript can access an item or a group of element by
+    # HTMl objects collections - document.body
+    # tag name - document.getElementsByTagName('enter tag name');
+    # class name - document.getElementsByClassName('enter class name');
+    # id - document.getElementById('enter id')
+*/
+
+
+    // 1.
+    // a. I can do
+/*  document.getElementById("heading").innerHTML = "Hey! Dennis, you are doing great";
+    document.getElementById("heading").style.border = "1px solid red";
+    document.getElementById("heading").style.padding = "1opx";
+    document.getElementById("heading").style.backgroundColor = "yellow";
+*/
+
+    // b. Or make it simpler
+    let heading = document.getElementById("heading");
+    heading.innerHTML = "Hey! Dennis, you are doing great";
+    heading.style.border = "1px solid purple";
+    heading.style.padding = "5px";
+    heading.style.backgroundColor = '#efefef';
+
+
+    // 2.
+    let link_to = document.getElementById("link").setAttribute("href", "index.html");
+
+
+    // 3.
+    let demoClass = document.getElementsByClassName('demo');
+    // getting at the class, javascript returns an array of elements with the same class name
+    // to apply chnaes we need to use the indexing method
+    demoClass[0].style.border = '1px solid blue';
+    demoClass[1].style.border = '1px solid red';
+    demoClass[1].style.color = 'blue';
+
+    // But if we want to apply a change to all the elements with the same class, not just one. We can do that by looping through the array of element.
+    for (i = 0; i < demoClass.length; i++) {
+        demoClass[i].style.padding = '10px';
+        demoClass[i].style.width = '200px';
+        demoClass[i].style.margin = '5px';
+    }
+
+
+
+    // Events -
+    // 1.
+    let button = document.getElementById('changeBackground');
+    button.addEventListener('click', function() {
+        document.body.style.backgroundColor = '#ffe6e6';
+     });
+    //
+    // Es6
+    // button.addEventListener('click', ( ) => {
+    //   document.body.style.backgroundColor = '#ff4b5b';
+    // });
+
+
+    // 2.
+    var num1 = document.getElementById('num-one');
+    var num2 = document.getElementById('num-two');
+    var result = document.getElementById('result');
+
+    num1.addEventListener("input", add);
+    num2.addEventListener("input", add);
+
+    function add() {
+        var x = parseFloat(num1.value) || 0;
+        var y = parseFloat(num2.value) || 0;
+        var sum = x + y;
+        result.innerHTML = "The sum is " + sum;
+    }
+
+
+
+
+/*
+    Manipulating the html node elementsThe html elements are related to each other through the parent-child relationship
+    All the nodes in a document make a DOM tree, which describes the relationship of an element inside another element
+    is known as the child element or child node and the element that contains the element within it is known as the parent element or parent
+
+    method:
+    document.createElement(element)    -  This will create a new HTML element
+
+    document.removeChild(element)    - This will remove an HTML child element from it's parent element
+
+    document.appendChild(element)    -  This will add an HTML child element to a parent element
+
+    document.replaceChild(new, old)    -  Replace an HTML element\
+
+    document.write(text)     -     Write into the HTML output stream
+
+    The previousElementSibling property returns the previous element of the specified element, in the same tree level.
+*/
+    </script>
+    </body>
+</html>

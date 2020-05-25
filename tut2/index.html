@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../tut1/file2.css">
+    </head>
+    <body>
+        <div class="head-section">
+            <h2>Javascript rocks!</h2>
+        </div><hr>
+
+        <div class="container">
+            Enter your name: <input type="" name="" id="inputName"><br /><br />
+            Enter your age: <input type="" name="" id="inputAge"><br /><br />
+            <button onclick="validate()">Validate</button>
+            <div id="snackbar">Some text some message..</div>
+        </div>
+
+    <script type="text/javascript">
+    // alert('Hey there');
+    // function validate(name, age) {
+    //     if (age >= 20) {
+    //         return "Hey! " + name + " You are old enough to club";
+    //     } else {
+    //         return "Sorry " + name + " you are not old enough to club";
+    //     }
+    // }
+    // alert(validate("Luca", 24));
+
+    function validate() {
+        // alert("Hey! " + name + " You are old enough to club");
+        var name = document.getElementById("inputName").value;
+        var age = document.getElementById("inputAge").value;
+        var x = document.getElementById("snackbar"), y;
+
+        if (age >= 20) {
+            x.innerHTML= "Hey! " + name + " you are old enough to club";
+        } else if (age == "") {
+            x.innerHTML= "Please fill the form";
+        } else {
+            x.innerHTML= "Sorry, " + name + " you are not old enough to club";
+        }
+
+        x.className = "show";
+        y = function(){
+              x.className = x.className.replace("show", "");
+          }
+        setTimeout(y, 3000);
+    }
+
+
+    // loop
+    // 1.
+    var mylist = ['apple', 'banana', 'mango', 'grape'];
+    mylist.forEach(function(value, index){
+      // console.log('I have ' + value + ' in my shopping bag');
+    });
+
+    </script>
+    </body>
+</html>
