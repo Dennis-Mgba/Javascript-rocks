@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+        .header h1 {
+            color: #29a329;
+        }
+
+        .container {
+            margin: 0 5%;
+        }
+
+        .container ul li {
+            font-size: 20px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Classes: HTML list binding</h1>
+        </div><hr>
+        <div class="container">
+            <ul id="list">
+                <!-- To be filled by javascript -->
+                <li>List 1</li>
+                <li>List 2</li>
+                <li>List 3</li>
+            </ul>
+        </div>
+    <script src="listBinding.js"></script>
+    <script type="text/javascript">
+    const list = document.getElementById('list');
+    // reference the class in the listBinding.js file
+    const myListBinding = new ListBinding(list);
+    </script>
+    </body>
+</html>

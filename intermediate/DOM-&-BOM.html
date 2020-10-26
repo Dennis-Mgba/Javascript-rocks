@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <div class="head-section">
+    		<h1>Plural-Sight</h1>
+    		<h4>Javascript rock!</h4>
+            <p>DOM</p>
+    	</div><hr>
+        <div class="container">
+            <p id="first" class="p1">First paragraph</p>
+            <p name="name1" class="p1">Second paragraph</p>
+            <p id="p3">Third paragraph</p>
+        </div>
+    <script type="text/javascript">
+    /*
+    ================================================================================
+                        Grabbing DOM elements
+    ================================================================================
+    */
+    /*
+    The most common methods for accessing the dom elements includes
+    - document.getElementsByTagName('tagName');
+    - document.getElementsByClassName('className');
+    - document.getElementById('idName');
+    */
+
+    // 1.
+    let el = document.getElementById('first');
+    //console.log(el);
+
+
+    // 2.
+    let els = document.getElementsByClassName('p1');
+    //console.log(els);            // in the console we get something as such - HTMLCollection which shows that the result is an array collection
+    //console.log(els[0]);        // to get the first item of the array - by indexing
+
+    // 3.
+    let pTag = document.getElementsByTagName('p');
+    //console.log(pTag);        // output an array of all the <p> tag elements
+
+
+
+
+    /*
+    ================================================================================
+                        Modifying DOM elements
+    ================================================================================
+    */
+    // 4.
+    let element = document.getElementById('first');
+    element.textContent = 'New content ...';
+
+
+    // 5.
+    let ele = document.getElementById('p3');
+    ele.setAttribute('class', 'third-para');
+    console.log(ele);
+
+
+    // 6.
+    let elem = document.getElementById('first');
+    elem.classList.add('p2');        // added anew class to the element
+    console.log(elem);
+
+
+    // 7.
+    let eleF = document.getElementById('first');
+    eleF.style.color = 'blue';
+    </script>
+    </body>
+</html>

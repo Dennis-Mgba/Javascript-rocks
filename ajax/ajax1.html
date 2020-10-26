@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Ajax 1 - reading and loading data from a text file</title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <div class="head-section">
+    		<h1 id="ajax">Ajax</h1>
+    		<h4>Learning ajax - Interacting with txt file system</h4>
+    	</div><hr>
+        <div class="container">
+            <button id="button">Get text file</button>
+            <p id="text"></p>
+        </div>
+
+    <script type="text/javascript">
+    let textSpace = document.getElementById('text');
+    let callBtn = document.getElementById('button');
+    callBtn.addEventListener('click', loadText);    // add an event listener to the button and integrate a call back
+
+    // define the call back
+    function loadText() {
+        // alert('Hey there');
+        var xhr = new XMLHttpRequest();
+        // using the open function - verbType, url/file, async
+        xhr.open('GET', '/ajax/sample.txt', true);
+        // console.log('READY STATE: ', xhr.readyState);
+
+        // 1.
+        xhr.onload = function() {
+            // console.log('READY STATE: ', xhr.readyState);
+            if(this.status == 200) {    // or xhr.status ==
+                // get the response
+                console.log(this.responseText);
+                textSpace.innerHTML = this.responseText;
+            } else if (this.status == 400) {
+                textSpace.innerHTML = "Not found";
+            }
+        }
+
+        // xhr.onerror = function() {
+        //     console.log('There was an error in the request ...')
+        // }
+
+        
+
+        // 2.
+        // xhr.onreadystatechange = function() {
+        //     console.log('READY STATE: ', xhr.readyState);
+        //     if (xhr.readyState == 4 && xhr.status == 200) {
+        //         // console.log(xhr.responseText);
+        //     }
+        //   }
+
+        // 3. - This is optional - it is used for loaders
+        // xhr.onprogress = function() {
+        //     // console.log('READY STATE: ', xhr.readyState);
+        // }
+
+        // sends request
+        xhr.send();
+    }
+
+    /*
+        The ready state of the request made processes the following checks before it returns a response (it depends on the type of request method used)
+        - 0: If request is initialized
+        - 1: server connection is established
+        - 2: request was received
+        - 3: Process request
+        - 4: request finished and response is ready
+
+        Asynchronous request - the request runs in the background thus no reloading of the documnet is required.
+    */
+    </script>
+    </body>
+</html>

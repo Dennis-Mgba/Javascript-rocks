@@ -1,0 +1,21 @@
+.head-section {
+    background: #EFEFEF;
+    width: 300px;
+    height: auto;
+    text-align: center;
+    margin: 1px auto;
+    padding: 10px 0 20px 0;
+    color: #333333;
+}
+
+.head-section h1 {
+    color: #ff5c33;
+}
+
+#ajax {
+    color: #0059b3;
+}
+
+.container {
+    margin: 0 5%;
+}

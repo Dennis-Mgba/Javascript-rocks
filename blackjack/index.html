@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <div class="head-section">
+    		<h1>Plural-Sight</h1>
+    		<h4>Javascript rock!</h4>
+            <p>A simple card game with pure javascript</p>
+    	</div><hr>
+        <div class="container">
+            <p id="text-area">Welcome to Blackjack</p>
+            <button id="new-game-button">New Game!</button>
+            <button id="hit-button">Hit!</button>
+            <button id="stay-button">Stay</button>
+        </div>
+
+    <script type="text/javascript">
+    /*
+    Black jack - card game
+    */
+    // DOM variables
+    let textArea      = document.getElementById('text-area');
+    let newGameButton = document.getElementById('new-game-button');
+    let hitButton     = document.getElementById('hit-button');
+    let stayButton    = document.getElementById('stay-button');
+
+    // Card variables
+    let suits  = ['Hearts', 'Clubs', 'Diamonds', 'Spades'];
+    let values = ['Ace', 'King', 'Queen', 'Jack','Ten', 'Nine', 'Eight', 'Seven', 'Six', 'Five', 'Four', 'Three', 'Two'];
+
+    // Game variables chaning up series of  variables with one let key word declaration
+    var gameStarted = false,
+    gameOver = false,
+    playerWon = false,
+    dealerCards = [],
+    playerCards = [],
+    dealerScore = 0,
+    playerCards = 0,
+    deck = [];
+
+    hitButton.style.display = "none";
+    stayButton.style.display = "none";
+    showStatus();
+
+
+    newGameButton.addEventListener('click', function() {
+        gameStarted = true;
+        gameOver = false;
+        playerWon = false;
+
+        deck = createDeck();    // create deck of cards
+        shuffleDeck(deck);    // shuffle cards random
+        dealerCards = [ getNextCard(), getNextCard() ];
+        playerCards = [ getNextCard(), getNextCard() ];
+        newGameButton.style.display = "none";
+        hitButton.style.display = "inline";
+        stayButton.style.display = "inline";
+        showStatus();
+    })
+
+
+    hitButton.addEventListener('click', function() {
+        // call get next card and push the response unto player cards
+        playerCards.push(getNextCard());
+        checkForEndOfGame();
+        showStatus();
+    });
+
+
+    stayButton.addEventListener('click', function() {
+        gameOver = true;
+        checkForEndOfGame();
+        showStatus();
+    });
+
+
+    function createDeck() {
+    let deck = [];
+    // loop through the suits
+        for (let suitX = 0; suitX < suits.length; suitX++) {
+        //   console.log(suits[suitX]);
+        // nested loop - and for each suits we'll loop through the value
+            for (let valueX = 0; valueX < values.length; valueX++) {
+            //       console.log(values[valueX]);
+            let card = {
+            suit  : suits[suitX],
+            value : values[valueX]
+            }
+            // now these iten are not passed into - deck
+            //       deck.push(values[valueX] + ' of ' + suits[suitX]);
+            deck.push(card);
+            //     console.log(deck);
+            }
+        }
+    return deck;
+    }
+
+
+    function shuffleDeck(cardItem) {
+        // loop through every cards in the deck
+        for(let i = 0; i < cardItem.length; i++) {
+            // randomly shuffle cards
+            let swapCard = Math.trunc(Math.random() * cardItem.length);
+            let tmp = cardItem[swapCard];
+            cardItem[swapCard] = cardItem[i];
+            cardItem[i] = tmp;
+        }
+    }
+
+
+    function getCardString(card) {
+        return card.value + ' of ' + card.suit;
+    }
+
+
+    function getNextCard() {
+        // get and output the first item from the deck
+        return deck.shift();
+    }
+
+
+    function getCardNumbericValue(card) {
+        switch (card.value) {
+            case 'Ace':
+                return 1;
+                break;
+            case 'Two':
+                return 2;
+                break;
+            case 'Three':
+                return 3;
+                break;
+            case 'Four':
+                return 4;
+                break;
+            case 'Five':
+                return 5;
+                break;
+            case 'Six':
+                return 6;
+                break;
+            case 'Seven':
+                return 7;
+                break;
+            case 'Eight':
+                return 8;
+                break;
+            case 'Nine':
+                return 9;
+                break;
+            default:
+                return 10;
+        }
+    }
+
+
+    function getScore(cardArray) {
+        let score = 0;
+        let hasAce = false;
+        for (let i = 0; i < cardArray.length; i++) {
+            let card = cardArray[i];
+            score += getCardNumbericValue(card);
+            if (card.Value === 'Ace') {
+                hasAce = true;
+            }
+        }
+        if (hasAce && score + 10 <= 21) {
+            return score + 10;
+        }
+        return score;
+    }
+
+
+    function updateScores() {
+        dealerScore = getScore(dealerCards);
+        playerScore = getScore(playerCards);
+    }
+
+
+    function checkForEndOfGame() {
+
+        updateScores();
+
+        if (gameOver) {
+            // let dealer take cards
+            while(dealerScore < playerScore && playerScore <= 21 && dealerScore <= 21) {
+                dealerCards.push(getNextCard());
+                updateScores();
+            }
+        }
+
+        if (playerScore > 21) {
+            playerWon = false;
+            gameOver = true;
+        } else if (dealerScore > 21) {
+            playerWon = true;
+            gameOver = true;
+        } else if (gameOver) {
+            if(playerScore > dealerScore) {
+                playerWon = true;
+            } else {
+                playerWon = false;
+            }
+
+        }
+
+    }
+
+
+    function showStatus() {
+        if (!gameStarted) {
+            textArea.innerText = 'Welcome to Blackjack!';
+            return;
+        }
+        // loop through the deck and display them
+        // for(let i = 0; i < deck.length; i++) {
+        //     textArea.innerText += '\n' + getCardString(deck[i]);
+        // }
+
+        // All dealer's cards
+        let dealerCardString = '';
+        for(let i = 0; i < dealerCards.length; i++) {
+            dealerCardString += getCardString(dealerCards[i]) + '\n';
+        }
+        // All player's cards
+        let playerCardString = '';
+        for(let i = 0; i < playerCards.length; i++) {
+            playerCardString += getCardString(playerCards[i]) + '\n';
+        }
+
+        updateScores();
+
+        textArea.innerText = "Dealer has: \n" + dealerCardString + '(Score: ' + dealerScore + ')\n\n' + "Player has: \n" + playerCardString + '(Score: ' + playerScore + ')\n\n';
+
+        if(gameOver) {
+            if(playerWon) {
+                textArea.innerText += "YOU WIN!";
+            } else {
+                textArea.innerText += "DEALER WINS";
+            }
+            newGameButton.style.display = 'inline';
+            hitButton.style.display = 'none';
+            stayButton.style.display = 'none';
+        }
+    }
+
+    </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <div class="head-section">
+    		<h1>Plural-Sight</h1>
+    		<h4>Javascript rock!</h4>
+            <p>Making HTTP request with jQuery</p>
+    	</div><hr>
+        <div class="container">
+
+        </div>
+    <script src="jquery3.5-mini.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    //See the ajax folder for more on http request
+
+    /*
+    ===========================================================================
+            HTTP request using jQuery
+    ===========================================================================
+    */
+    // 1. get request
+    let promise = $.get('https://api.github.com/users');    // Using the jQuery $.get, we make a request to the api endpoint and save it our local varaible called promise
+    promise.then(                                          // then run our handlers check with promise.then() - log what ever result in the console
+        data => console.log('success: ', data),            // if it was a success, this line of function wlll get called - with the data fetched as a parameter
+        error => console.log('error: ', error)            // if the request fail, this line of error function will get called - with the type of error as a second parameter
+    );
+
+
+
+    // 2. post request
+    let user = {
+        name: 'Dennis Mgba',
+        avatar: 'deni.jpg'
+    };
+
+    let promise = $.post('http://myid.mockapi.io/api/v1/users', user);
+    promise.then(
+        data => console.log('data: ', data),    // we can even make this function a toast reponse pop up to tell the user that the post request was successful
+        error => console.log('error: ', error)
+    );
+    </script>
+    </body>
+</html>

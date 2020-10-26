@@ -170,3 +170,14 @@ let person = {
 for (let x in person) {
     txt += person[x] + " ";
 }
+
+
+// 2.
+var people=[
+  {first_name:"john",last_name:"doe"},
+  {first_name:"mary",last_name:"beth"}
+];
+
+for (let i = 0; i < people.length; i++) { 
+  console.log(people[i].first_name);
+}

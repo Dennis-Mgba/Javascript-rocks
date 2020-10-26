@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="../css/styles.css">
+    </head>
+    <body>
+        <div class="head-section">
+    		<h1>Plural-Sight</h1>
+    		<h4>Javascript rock!</h4>
+            <p>Intercepting a form submission with js before it get posted to the server</p>
+    	</div><hr>
+        <div class="container">
+            <form id="user-form" action="/somepath" method="post">
+                <input type="text" name="user" value="" placeholder="User Name">
+                <span id="user-error"></span>
+                <br><br>
+                <input type="text" name="avatar-file" value="" placeholder="Avatar File">
+                <span id="avatar-error"></span>
+                <br><br>
+                <button type="submit" name="button">Submit</button>
+            </form>
+        </div>
+
+    <script type="text/javascript">
+    //
+    let form = document.getElementById('user-form');        // grab the form
+    // prevent the brower from submitting the form
+    event.preventDefault();
+    form.addEventListener('submit', event => {             // add event listener to the submit event
+        // access the data from the form fields
+        let user = form.elements['user'];
+        let avatarFile = form.elements['avatar-file'];
+
+        // console.log(user.value, avatarFile.value);
+
+        // validate input fields - we can specify a condition to be met
+        if(user.value.length < 4) {
+            let userError = document.getElementById('user-error');
+            userError.textContent = 'Invalid entry';
+            userError.style.color = 'red';
+            user.style.borderColor = 'red';
+            user.focus(); // calling the focus method
+        } else {
+            let posting = {
+                user: user.value,
+                avatarFile: avatarFile.value
+            };
+            // console.log(posting);
+
+            let promise = $.post('http://myid.mockapi.io/api/v1/users', posting);
+            promise.then(
+                data => console.log('data: ', data),    // we can even make this function a toast reponse pop up to tell the user that the post request was successful
+                error => console.log('error: ', error)
+            );
+        }
+
+    });
+    </script>
+    </body>
+</html>

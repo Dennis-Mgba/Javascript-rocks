@@ -27,6 +27,6 @@ if (age < 16) {
     alert("You are not allowed to drive");
 } else if (age == 16) {
     alert("You can drive FINALLY!");
-} else {
+} else if (age > 16){
     alert("You have probably been driving already");
 }
